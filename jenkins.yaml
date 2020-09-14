@@ -2,9 +2,7 @@ jenkins:
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
-  authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+  authorizationStrategy: "loggedInUsersCanDoAnything"
   clouds:
   - kubernetes:
       containerCap: 10
@@ -33,7 +31,7 @@ jenkins:
           workingDir: "/home/jenkins"
         label: "jenkins-jenkins-slave "
         name: "default"
-        nodeUsageMode: NORMAL
+        nodeUsageMode: "NORMAL"
         podRetention: "never"
         serviceAccount: "default"
         yamlMergeStrategy: "override"
@@ -84,12 +82,16 @@ security:
     creationOfLegacyTokenEnabled: false
     tokenGenerationOnCreationEnabled: false
     usageStatisticsEnabled: true
+  copyartifact:
+    mode: PRODUCTION
   sSHD:
     port: -1
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
     - "jobBuildDiscarder"
+  casCGlobalConfig:
+    configurationPath: "https://raw.githubusercontent.com/lovefov/casc/master/jenkins.yaml"
   defaultFolderConfiguration:
     healthMetrics:
     - worstChildHealthMetric:
@@ -105,7 +107,7 @@ unclassified:
     showEntireCommitSummaryInChanges: false
     useExistingAccountWithSameEmail: false
   location:
-    adminAddress: "address not configured yet <nobody@nowhere>"
+    adminAddress: "sa@keyayun.com"
     url: "http://jenkins.infra2.keyayun.com/"
   mailer:
     charset: "UTF-8"
@@ -113,6 +115,12 @@ unclassified:
     useTls: false
   pollSCM:
     pollingThreadCount: 10
+  timestamper:
+    allPipelines: false
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+  upstream:
+    globalUpstreamFilterStrategy: UseOldest
 tool:
   git:
     installations:
